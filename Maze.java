@@ -13,7 +13,7 @@ public class Maze {
         String line = in.nextLine();
         System.out.println(line);
         rows++;
-        cols = line.length() - 1;
+        cols = line.length();
       }
     } catch (FileNotFoundException e) {
       System.out.println("file not found!");
