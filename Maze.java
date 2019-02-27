@@ -17,9 +17,9 @@ public class Maze {
       String line = in.nextLine();
       rows++;
       cols = line.length();
-      for (char c : line) {
-        if (c == 'E') countE++;
-        if (c == 'S') countS++;
+      for (int i = 0; i < line.length(); i++) {
+        if (line.charAt(i) == 'E') countE++;
+        if (line.charAt(i) == 'S') countS++;
       }
       if (countE > 1 || countS > 1) throw new IllegalStateException ("only one start or end allowed");
     }
