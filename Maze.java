@@ -7,35 +7,24 @@ public class Maze {
   private char[][] maze;
   private boolean animate;
 
-  public Maze(String filename) {
-    Scanner in;
+  public Maze(String filename) throws FileNotFoundException{
     int rows = 0;
     int cols = 0;
-    try {
-      in = new Scanner(new File(filename));
-      while (in.hasNextLine()) {
-        String line = in.nextLine();
-        rows++;
-        cols = line.length();
-      }
-    } catch (FileNotFoundException e) {
-      System.out.println("File not found!");
-      System.exit(1);
+    Scanner in = new Scanner(new File(filename));
+    while (in.hasNextLine()) {
+      String line = in.nextLine();
+      rows++;
+      cols = line.length();
     }
     maze = new char[rows][cols];
-    try {
-      in = new Scanner(new File(filename));
-      int row = 0;
-      while (in.hasNextLine()) {
-        String line = in.nextLine();
-        for (int i = 0; i < cols; i++) {
-          maze[row][i] = line.charAt(i);
-        }
-        row++;
+    in = new Scanner(new File(filename));
+    int row = 0;
+    while (in.hasNextLine()) {
+      String line = in.nextLine();
+      for (int i = 0; i < cols; i++) {
+        maze[row][i] = line.charAt(i);
       }
-    } catch (FileNotFoundException e) {
-      System.out.println("File not found!");
-      System.exit(1);
+      row++;
     }
     animate = false;
   }
