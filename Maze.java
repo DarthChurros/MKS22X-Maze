@@ -10,11 +10,18 @@ public class Maze {
   public Maze(String filename) throws FileNotFoundException{
     int rows = 0;
     int cols = 0;
+    int countE = 0;
+    int countS = 0;
     Scanner in = new Scanner(new File(filename));
     while (in.hasNextLine()) {
       String line = in.nextLine();
       rows++;
       cols = line.length();
+      for (char c : line) {
+        if (c == 'E') countE++;
+        if (c == 'S') countS++;
+      }
+      if (countE > 1 || countS > 1) throw new IllegalStateException ("only one start or end allowed");
     }
     maze = new char[rows][cols];
     in = new Scanner(new File(filename));
@@ -26,6 +33,7 @@ public class Maze {
       }
       row++;
     }
+
     animate = false;
   }
 
