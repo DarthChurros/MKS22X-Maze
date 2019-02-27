@@ -37,6 +37,23 @@ public class Maze {
     animate = false;
   }
 
+  private void wait(int millis) {
+    try {
+       Thread.sleep(millis);
+    }
+    catch (InterruptedException e) {
+    }
+  }
+
+  public void setAnimate(boolean b) {
+    animate = b;
+  }
+
+  public void clearTerminal(){
+    //erase terminal, go to top left of screen.
+    System.out.println("\033[2J\033[1;1H");
+  }
+
   public String toString() {
     String ans = "";
     for (int i = 0; i < maze.length; i++) {
@@ -47,8 +64,6 @@ public class Maze {
     }
     return ans;
   }
-
-
 
   public static void main(String[] args) {
     Maze test;
