@@ -77,6 +77,7 @@ public class Maze {
         if (maze[row+1][col] == ' ') return solve(row+1, col, steps+1);
         if (maze[row+1][col] == ' ') return solve(row+1, col, steps+1);
         maze[row][col] = ' ';
+        break;
       default:
         return 0;
     }
