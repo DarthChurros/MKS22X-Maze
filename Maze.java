@@ -59,16 +59,22 @@ public class Maze {
       for (int j = 0; j < maze[i].length; j++) {
         if (maze[i][j] == 'S') {
           maze[i][j] = '@';
-          return solve(i, j);
+          return solve(i, j, 0);
         }
       }
     }
     return -1;
   }
 
-  private int solve(int row, int col) {
-
-    return 0;
+  private int solve(int row, int col, int steps) {
+    switch (maze[row][col]) {
+      case 'E':
+        return steps;
+      case ' ':
+        return solve(row+1, col, 0) + solve(row-1, col, 0) + solve(row, col-1, 0) + solve(row, col+1, 0);
+      default:
+        return 0;
+    }
   }
 
   public String toString() {
