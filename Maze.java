@@ -20,6 +20,7 @@ public class Maze {
       for (int i = 0; i < line.length(); i++) {
         if (line.charAt(i) == 'E') countE++;
         if (line.charAt(i) == 'S') countS++;
+        if (!"SE# ".contains(""+line.charAt(i))) throw new IllegalStateException("Invalid character");
       }
       if (countE > 1 || countS > 1) throw new IllegalStateException ("only one start or end allowed");
     }
@@ -58,7 +59,6 @@ public class Maze {
     for (int i = 0; i < maze.length; i++) {
       for (int j = 0; j < maze[i].length; j++) {
         if (maze[i][j] == 'S') {
-          maze[i][j] = '@';
           return solve(i, j, 0);
         }
       }
@@ -71,7 +71,12 @@ public class Maze {
       case 'E':
         return steps;
       case ' ':
-        return solve(row+1, col, 0) + solve(row-1, col, 0) + solve(row, col-1, 0) + solve(row, col+1, 0);
+        maze[row][col] = '@';
+        if (maze[row+1][col] == ' ') return solve(row+1, col, steps+1);
+        if (maze[row+1][col] == ' ') return solve(row+1, col, steps+1);
+        if (maze[row+1][col] == ' ') return solve(row+1, col, steps+1);
+        if (maze[row+1][col] == ' ') return solve(row+1, col, steps+1);
+        maze[row][col] = ' ';
       default:
         return 0;
     }
@@ -93,6 +98,9 @@ public class Maze {
     try {
       test = new Maze("Maze1.txt");
       test.clearTerminal();
+      System.out.println(test);
+      System.out.println("Solving...");
+      test.solve();
       System.out.println(test);
     } catch (FileNotFoundException e) {
       System.out.println("File not found!");
