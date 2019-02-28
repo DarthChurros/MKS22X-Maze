@@ -49,9 +49,24 @@ public class Maze {
     animate = b;
   }
 
-  public void clearTerminal(){
+  public void clearTerminal() {
     //erase terminal, go to top left of screen.
     System.out.println("\033[2J\033[1;1H");
+  }
+
+  public int solve() {
+    for (int i = 0; i < maze.length; i++) {
+      for (int j = 0; j < maze[i].length; j++) {
+        if (maze[i][j] == 'S') {
+          return solve(i, j);
+        }
+      }
+    }
+    return -1;
+  }
+
+  private int solve(int row, int col) {
+    return 0;
   }
 
   public String toString() {
@@ -69,6 +84,7 @@ public class Maze {
     Maze test;
     try {
       test = new Maze("Maze1.txt");
+      test.clearTerminal();
       System.out.println(test);
     } catch (FileNotFoundException e) {
       System.out.println("File not found!");
