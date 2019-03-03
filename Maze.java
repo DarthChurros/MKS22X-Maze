@@ -67,18 +67,20 @@ public class Maze {
   }
 
   private int solve(int row, int col) {
-    System.out.println(this);
-    wait(1000);
+    wait(100);
+    if (maze[row][col] == 'S') maze[row][col] = ' ';
     switch (maze[row][col]) {
       case 'E':
-        return 1;
+        return 0;
       case ' ':
-        int steps = Math.max(Math.max(Math.max(solve(row+1, col),solve(row,col+1)),solve(row-1,col)),solve(row,col-1))
-        if (steps < 0) {
-          return -1;
-        }
         maze[row][col] = '@';
-        return steps + 1;
+        for (int i = 0; i < 4; i++) {
+          int j = (i + 2) % 4;
+          int testPath = solve(row + i / 2 * (int)Math.pow(-1, i), col + j / 2 * (int)Math.pow(-1, j));
+          if (testPath >= 0) return testPath + 1;
+        }
+        maze[row][col] = '.';
+        return -1;
       default:
         return -1;
     }
@@ -102,7 +104,7 @@ public class Maze {
       test.clearTerminal();
       System.out.println(test);
       System.out.println("Solving...");
-      test.solve();
+      System.out.println(test.solve());
       System.out.println(test);
     } catch (FileNotFoundException e) {
       System.out.println("File not found!");
