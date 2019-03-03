@@ -67,7 +67,11 @@ public class Maze {
   }
 
   private int solve(int row, int col) {
-    wait(100);
+    if(animate){
+      clearTerminal();
+      System.out.println(this);
+      wait(20);
+    }
     if (maze[row][col] == 'S') maze[row][col] = ' ';
     switch (maze[row][col]) {
       case 'E':
