@@ -59,27 +59,28 @@ public class Maze {
     for (int i = 0; i < maze.length; i++) {
       for (int j = 0; j < maze[i].length; j++) {
         if (maze[i][j] == 'S') {
-          return solve(i, j, 0);
+          return solve(i, j);
         }
       }
     }
     return -1;
   }
 
-  private int solve(int row, int col, int steps) {
+  private int solve(int row, int col) {
+    System.out.println(this);
+    wait(1000);
     switch (maze[row][col]) {
       case 'E':
-        return steps;
+        return 1;
       case ' ':
+        int steps = Math.max(Math.max(Math.max(solve(row+1, col),solve(row,col+1)),solve(row-1,col)),solve(row,col-1))
+        if (steps < 0) {
+          return -1;
+        }
         maze[row][col] = '@';
-        if (maze[row+1][col] == ' ') return solve(row+1, col, steps+1);
-        if (maze[row+1][col] == ' ') return solve(row+1, col, steps+1);
-        if (maze[row+1][col] == ' ') return solve(row+1, col, steps+1);
-        if (maze[row+1][col] == ' ') return solve(row+1, col, steps+1);
-        maze[row][col] = ' ';
-        break;
+        return steps + 1;
       default:
-        return 0;
+        return -1;
     }
   }
 
